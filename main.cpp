@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class element
@@ -102,27 +104,14 @@ class kolekcja
     }
 };
 
-struct Krawedz
+
+
+int ** G;
+
+void input(int p, int k, int w)
 {
-    int nr1;
-    int nr2;
-    int waga;
-};
-
-vector<Krawedz> * G;
-
-void input(int k, int p, int w)
-{
-    Krawedz temp;
-    temp.nr1 = k;
-    temp.nr2 = p;
-    temp.waga = w;
-    G[p-1].push_back(temp);
-
-    temp.nr1 = p;
-    temp.nr2 = k;
-    temp.waga = w;
-    G[k-1].push_back(temp);
+    G[p][k] = w;
+    G[k][p] = w;
 }
 
 //n* (n-1) - TO JEST LICZA WSZYSTKICH MOZLIWYCH KRAWEDZI W GRAFIE, n to liczba wierzcholkow
@@ -135,22 +124,36 @@ int lok(int n, int licznik, int mianownik) // wyznaczam liczbę krawedzi dla dan
 
 int main()
 {
-    int N=9;
+    srand(time( 0 ));
+    int N=10;
     //cout << "Podaj liczbe wierzcholkow: ";
     //cin >> N;
-    int M;
-    //cout << "Podaj liczbe krawędzi: ";
-    //cin >> M;
+    int M = lok(N,1,2);
 
-
-    G= new vector<Krawedz>[N];
-
-
-
+    G = new int *[N];
+    for(int i = 0; i  < N ; i++)
+    {
+        G[i]= new int [N];
+    }
 
     kolekcja *S = new kolekcja;
     kolekcja *L = new kolekcja;
 
+    int fw = (rand()%(N-1))+0;//numer pierwszego wierzcholka
+
+    S->add(fw);
+
+    for(int i=0; i<N;i++)
+    {
+        if(i!=fw)
+        {
+            L->add(i);
+        }
+    }
+
+    S->show();
+    cout<< endl;
+    L->show();
 
 
 
