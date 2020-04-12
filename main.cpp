@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 class element
@@ -20,10 +20,11 @@ class kolekcja
 {
     public:
     element *first;;
-
+    int licznik;
     kolekcja()
     {
         first = 0;
+        licznik = 0;
     }
     void add(int i)
     {
@@ -43,10 +44,11 @@ class kolekcja
             temp->next = tmp;
             tmp->next = 0;
         }
+        licznik++;
     }
 
-    void del (int i)
-    {
+    void del (int i) // nie sprawdzam sobie zakresów liczby elementow
+    {                // listy bo nie ma takiej potrzeby jeœli wiem co usuwam
         if (i==1)
         {
             element *temp = first;
@@ -74,6 +76,7 @@ class kolekcja
                 delete deleted;
             }
         }
+        licznik--;
     }
 
     void show()
@@ -81,53 +84,75 @@ class kolekcja
         element *temp = first;
         while (temp)
         {
-            cout << temp->nr << " ";
+            cout << temp->nr << " " ;
             temp = temp->next;
         }
         cout << endl;
     }
+    bool isEmpty()
+    {
+        if(licznik == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 };
 
+struct Krawedz
+{
+    int nr1;
+    int nr2;
+    int waga;
+};
 
+vector<Krawedz> * G;
 
+void input(int k, int p, int w)
+{
+    Krawedz temp;
+    temp.nr1 = k;
+    temp.nr2 = p;
+    temp.waga = w;
+    G[p-1].push_back(temp);
 
+    temp.nr1 = p;
+    temp.nr2 = k;
+    temp.waga = w;
+    G[k-1].push_back(temp);
+}
 
-
-
-
-
-
-
-
-
-
-
+//n* (n-1) - TO JEST LICZA WSZYSTKICH MOZLIWYCH KRAWEDZI W GRAFIE, n to liczba wierzcholkow
+int lok(int n, int licznik, int mianownik) // wyznaczam liczbę krawedzi dla danego procenta, czyli dla 50% mam licznik =1, mianownik =2
+{
+    int x =n*(n-1);
+    x = x * licznik / mianownik;
+    return x;
+}
 
 int main()
 {
-    //int n;
+    int N=9;
     //cout << "Podaj liczbe wierzcholkow: ";
-    //cin >> n;
+    //cin >> N;
+    int M;
+    //cout << "Podaj liczbe krawędzi: ";
+    //cin >> M;
+
+
+    G= new vector<Krawedz>[N];
+
+
+
 
     kolekcja *S = new kolekcja;
     kolekcja *L = new kolekcja;
 
-    S->add(1);
-    S->add(2);
-    S->add(3);
-    S->add(4);
-    S->add(5);
 
-    S->show();
-    cout << endl << endl;
 
-    S->del(1);
-    S->del(1);
-    S->del(1);
-    S->del(1);
-    //S->del(1);
-
-    S->show();
 
 
 
