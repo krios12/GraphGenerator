@@ -51,25 +51,28 @@ class kolekcja
 
     void del (int i) // nie sprawdzam sobie zakresów liczby elementow
     {                // listy bo nie ma takiej potrzeby jeœli wiem co usuwam
-        if (i==1)
+        if (i==0)
         {
             element *temp = first;
             first = temp->next;
             delete temp;
         }
-        else if (i>=2)
+        else if (i>=1)
         {
-            int j = 1;
+            int j = 0;
             element *temp = first;
             while (temp)
             {
-                if ((j+1)==i) break;
+                if ((j+1)==i)
+                {
+                    break;
+                }
                 temp = temp->next;
                 j++;
             }
-            if (temp->next->next==0)
+            if (temp->next==0)
             {
-            delete temp->next;
+                delete temp;
             }
             else
             {
@@ -91,6 +94,22 @@ class kolekcja
         }
         cout << endl;
     }
+
+    int getNumber(int i)
+    {
+        element *temp = first;
+        int x =0;
+        while (temp)
+        {
+            if(i == x)
+            {
+                return temp->nr;
+            }
+            temp = temp->next;
+            x++;
+        }
+    }
+
     bool isEmpty()
     {
         if(licznik == 0)
@@ -151,12 +170,22 @@ int main()
         }
     }
 
+    int randS;
+    int randL;
+    int randW;
+
+    while(!L->isEmpty())
+    {
+        randS = (rand()%S->licznik)+0;
+        randL = (rand()%L->licznik)+0;
+        randW = (rand()%100)+1;
+
+        input(S->getNumber(randS),L->getNumber(randL),randW);
+
+        S->add(L->getNumber(randL));
+        L->del(randL);
+    }
+
     S->show();
-    cout<< endl;
     L->show();
-
-
-
-
-
 }
