@@ -144,17 +144,24 @@ int lok(int n, int licznik, int mianownik) // wyznaczam liczbę krawedzi dla dan
 int main()
 {
     srand(time( 0 ));
-    int N=10;
+    int N=20;
     //cout << "Podaj liczbe wierzcholkow: ";
     //cin >> N;
     int M = lok(N,1,2);
-
+/////////////////////////////////////////////////////////////////////
     G = new int *[N];
     for(int i = 0; i  < N ; i++)
     {
         G[i]= new int [N];
     }
-
+    for(int i = 0; i  < N ; i++)
+    {
+        for(int j = 0; j  < N ; j++)
+        {
+            G[i][j]=0;
+        }
+    }
+///////////////////////////////////////////////////////////////////
     kolekcja *S = new kolekcja;
     kolekcja *L = new kolekcja;
 
@@ -176,9 +183,9 @@ int main()
 
     while(!L->isEmpty())
     {
-        randS = (rand()%S->licznik)+0;
-        randL = (rand()%L->licznik)+0;
-        randW = (rand()%100)+1;
+        randS = (rand()%S->licznik)+0; // losuje index elementu z S
+        randL = (rand()%L->licznik)+0; // losuje index elementu z L
+        randW = (rand()%9)+1;  // losuje wage
 
         input(S->getNumber(randS),L->getNumber(randL),randW);
 
@@ -186,6 +193,17 @@ int main()
         L->del(randL);
     }
 
-    S->show();
-    L->show();
+    //S->show();
+    //L->show();
+////////////////////////////////////////////////////////////////////////////////////////
+    for(int i = 0; i  < N ; i++)
+    {
+        for(int j = 0; j  < N ; j++)
+        {
+            cout << " " << G[i][j];
+        }
+        cout << endl;
+    }
+
+
 }
