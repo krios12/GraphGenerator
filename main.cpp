@@ -2,6 +2,8 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <graphics.h>
+#include<dos.h>
 using namespace std;
 
 class element
@@ -204,6 +206,4 @@ int main()
         }
         cout << endl;
     }
-
-
 }
