@@ -4,7 +4,16 @@
 #include <ctime>
 #include <graphics.h>
 #include<dos.h>
+#include<fstream>
 using namespace std;
+
+
+struct edge
+{
+    int x;
+    int y;
+    int w;
+};
 
 class element
 {
@@ -132,7 +141,7 @@ int ** G;
 void input(int p, int k, int w)
 {
     G[p][k] = w;
-    G[k][p] = w;
+    //G[k][p] = w;
 }
 
 //n* (n-1) - TO JEST LICZA WSZYSTKICH MOZLIWYCH KRAWEDZI W GRAFIE, n to liczba wierzcholkow
@@ -198,6 +207,7 @@ int main()
     //S->show();
     //L->show();
 ////////////////////////////////////////////////////////////////////////////////////////
+///////////wyswietlanie
     for(int i = 0; i  < N ; i++)
     {
         for(int j = 0; j  < N ; j++)
@@ -206,4 +216,43 @@ int main()
         }
         cout << endl;
     }
+///////////////////////////////////////////
+// odczyt grafu o reprezentcji macierzowej do tablicy krawędzi
+
+    int liczbaKrawedzi = N-1;
+    edge * edges = new edge [M];
+
+    int counter=0;
+    for(int i = 0; i < N ; i++)
+    {
+        for(int j = 0; j < N ; j++)
+        {
+            if(G[i][j]!=0)
+            {
+                edges[counter].x = i;
+                edges[counter].y = j;
+                edges[counter].w = G[i][j];
+                counter++;
+            }
+        }
+    }
+
+    cout << endl;
+    for(int i = 0; i < counter; i++)
+    {
+        cout << edges[i].x << " -> " << edges[i].y << " : " << edges[i].w << endl;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////
+// zapis do pliku listy krawędzi;
+
+
+    ofstream addToFile("plik.txt");
+
+    for(int i = 0; i < counter; i++)
+    {
+        addToFile << edges[i].x << "-" << edges[i].y << ":" << edges[i].w << endl;
+    }
+    addToFile.close();
+
 }
