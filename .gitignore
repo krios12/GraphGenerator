@@ -1,6 +1,6 @@
 bin
 obj
-GraphGenerator.cbp
-GraphGenerator.depend
-GraphGenerator.layout
+generator.cbp
+generator.depend
+generator.layout
 plik.txt
