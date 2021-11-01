@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1613068515 source:c:\users\dawid\desktop\generator\generator\main.cpp
-	<iostream>
-	<vector>
-	<cstdlib>
-	<ctime>
-	<dos.h>
-	<fstream>
-
